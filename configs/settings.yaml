@@ -1,0 +1,58 @@
+# AIRIS non-secret configuration.
+# Secrets (API keys, credentials) live in .env, never here.
+
+app:
+  name: "AIRIS"
+  version: "0.1.0"
+
+# ---- Target city & demo case study ----
+city:
+  name: "Delhi"
+  # Bounding box: [min_lon, min_lat, max_lon, max_lat] — covers Delhi NCT
+  bbox: [76.84, 28.40, 77.35, 28.88]
+  timezone: "Asia/Kolkata"
+
+# Upwind bounding box used for stubble-fire attribution (Punjab + Haryana)
+upwind_region:
+  name: "Punjab-Haryana"
+  bbox: [73.87, 27.65, 76.93, 32.55]
+
+case_study:
+  name: "delhi_diwali_2024"
+  start_date: "2024-10-25"
+  end_date: "2024-11-10"
+  peak_date: "2024-11-01"
+
+# ---- Data pipeline date ranges ----
+data_pipeline:
+  historical_start_date: "2023-01-01"
+  historical_end_date: "2024-12-31"
+  time_step: "1h"
+
+# ---- Paths (relative to repo root) ----
+paths:
+  raw_data_dir: "data_pipeline/raw"
+  processed_data_dir: "data_pipeline/processed"
+  features_file: "data_pipeline/processed/features.parquet"
+  reference_csv: "data_pipeline/reference/dss_reference.csv"
+  model_artifacts_dir: "backend/ml/artifacts"
+
+# ---- Model artifact filenames (versioned, pinned for the demo) ----
+models:
+  forecast:
+    active_version: "forecast_v1"
+    filename_template: "forecast_v{version}.pkl"
+  attribution:
+    active_version: "attribution_v1"
+    filename_template: "attribution_v{version}.pkl"
+
+# ---- API configuration ----
+api:
+  prefix: "/api/v1"
+  request_timeout_seconds: 30
+  default_forecast_horizon_hours: 48
+
+# ---- Forecast confidence / interval settings ----
+forecast:
+  quantiles: [0.1, 0.5, 0.9]
+  lag_hours: [1, 6, 24]
