@@ -301,8 +301,8 @@ def fetch_sensor_hours(
                     session,
                     f"{API_BASE_URL}/sensors/{sensor_id}/hours",
                     params={
-                        "date_from": chunk_start.strftime("%Y-%m-%dT%H:%M:%SZ"),
-                        "date_to": chunk_end.strftime("%Y-%m-%dT%H:%M:%SZ"),
+                        "datetime_from": chunk_start.strftime("%Y-%m-%dT%H:%M:%SZ"),
+                        "datetime_to": chunk_end.strftime("%Y-%m-%dT%H:%M:%SZ"),
                         "limit": PAGE_LIMIT,
                         "page": page,
                     },
