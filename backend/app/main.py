@@ -1,10 +1,10 @@
 """
 AIRIS backend entrypoint.
 
-Milestone 0 scope only: app instantiation, CORS, a health check, and
-placeholder router mount points. No business routes are registered yet —
-those land in Milestone 10 (backend/app/api/routes_*.py), each mounted
-here with its own `include_router` call.
+App instantiation, CORS, a health check, and business route mount points.
+The forecast router (backend/app/api/routes_forecast.py) is now mounted.
+Remaining routers (attribution, recommendation, casestudy) land in
+Milestone 10, each mounted here with its own `include_router` call.
 """
 
 from __future__ import annotations
@@ -53,10 +53,10 @@ def register_routes(app: FastAPI) -> None:
     """
     api_prefix = settings.yaml.api.prefix
 
+    from backend.app.api.routes_forecast import router as forecast_router
+    app.include_router(forecast_router, prefix=api_prefix, tags=["forecast"])
+
     # --- Placeholder mount points (Milestone 10) ---
-    # from backend.app.api.routes_forecast import router as forecast_router
-    # app.include_router(forecast_router, prefix=api_prefix, tags=["forecast"])
-    #
     # from backend.app.api.routes_attribution import router as attribution_router
     # app.include_router(attribution_router, prefix=api_prefix, tags=["attribution"])
     #
@@ -66,7 +66,7 @@ def register_routes(app: FastAPI) -> None:
     # from backend.app.api.routes_casestudy import router as casestudy_router
     # app.include_router(casestudy_router, prefix=api_prefix, tags=["casestudy"])
 
-    logger.info("Routers registered under prefix '%s' (none yet — Milestone 0).", api_prefix)
+    logger.info("Routers registered under prefix '%s'.", api_prefix)
 
 
 app = create_app()
