@@ -90,3 +90,11 @@ logs/
 # ==== Jupyter ====
 .ipynb_checkpoints/
 notebooks/*.ipynb_checkpoints
+.vemv/
+.venv/
+node_modules/
+dist/
+__pycache__/
+*.pyc
+.env
+.env.*
