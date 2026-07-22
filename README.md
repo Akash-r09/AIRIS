@@ -1,123 +1,142 @@
-# AIRIS — Artificial Intelligence for Real-time Intervention Strategy
+<div align="center">
 
-AIRIS is an AI Chief Environmental Officer for urban air quality. Instead of showing an administrator
-that the AQI is high, it explains *why* it's high, *who* is likely responsible, *what* intervention
-should be taken, and *where* inspectors should be deployed first — with a confidence score attached
-to every claim.
+# 🌍 AIRIS
 
-Built for the ET AI Hackathon (Problem 5: AI-Powered Urban Air Quality Intelligence for Smart City
-Intervention) as a 3-day prototype by a 2–3 person undergraduate team.
+### AI Environmental Intelligence Platform
 
-## Features
+**AI-powered environmental monitoring, PM2.5 forecasting, weather intelligence, and actionable air-quality insights.**
 
-1. **Hyperlocal AQI Forecast** — 24–48 hour AQI forecasts at ward/grid-cell resolution, with
-   prediction intervals, not just point estimates.
-2. **Ground-Truth-Calibrated Source Attribution** — an explainable engine that attributes pollution
-   to source categories (stubble burning, vehicular, construction, etc.) with a confidence score,
-   benchmarked against a manually curated set of publicly reported SAFAR/DSS figures for documented
-   dates.
-3. **Enforcement Priority Ranking** — deterministic, explainable scoring that turns attribution +
-   forecast severity into a ranked, justified list of recommended interventions.
-4. **Officer Briefing Generator** — a single scoped LLM call that narrates the already-computed
-   numbers above into a plain-language briefing paragraph. The LLM never invents a number.
-5. **Decision Console** — a single-screen map + briefing panel UI (no multi-tab dashboard), demoed
-   end-to-end against one real historical event: the Delhi Diwali 2024 AQI spike.
+![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)
+![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
+![Machine Learning](https://img.shields.io/badge/Machine-Learning-orange?style=for-the-badge)
 
-## Architecture
+---
 
-```
-Data Sources (OpenAQ + Open-Meteo + NASA FIRMS + OSM)
-        │
-        ▼
-AQI Forecast Engine (LightGBM / XGBoost)
-        │
-        ▼
-Evidence Engine (Rules + Explainability + Confidence)
-        │
-        ▼
-Priority Engine (Deterministic Scoring)
-        │
-        ▼
-Officer Brief Generator (Gemini API)
-        │
-        ▼
-Decision Console (React + Leaflet)
-```
+> **AIRIS combines machine learning, weather intelligence, and environmental data into a single interactive dashboard for forecasting air quality and generating AI-powered insights.**
 
-The backend never fetches external data at request time — all model inputs are pre-computed by
-`data_pipeline/` and read from disk. This keeps the live demo fast and immune to any external API
-being slow or unavailable on stage. Full detail in `docs/architecture.md`.
+</div>
 
-## Tech Stack
+---
 
-| Layer | Choice |
-|---|---|
-| Backend | Python 3.11+, FastAPI |
-| ML | scikit-learn, LightGBM, XGBoost, SHAP |
-| Geospatial | GeoPandas, OSMnx |
-| Data storage | Parquet (pandas/pyarrow), DuckDB/SQLite |
-| Frontend | React 18, TypeScript, Vite, Leaflet, TailwindCSS |
-| LLM | Gemini API |
-| Data sources | OpenAQ, Open-Meteo, NASA FIRMS, OpenStreetMap |
+# 📸 Dashboard Preview
 
-Every choice above is CPU-only and validated to run comfortably on a MacBook Air M1 — no GPU,
-no deep learning, no distributed compute. See `docs/architecture.md` Part 5 for the full validation.
+<img width="787" height="836" alt="Screenshot 2026-07-22 at 8 56 53 PM" src="https://github.com/user-attachments/assets/91d51cdd-8922-42a8-9ab4-9c2c09b1a5c7" />
+<img width="890" height="448" alt="Screenshot 2026-07-22 at 8 56 16 PM" src="https://github.com/user-attachments/assets/cee39d6c-326f-4098-9582-87c599f67990" />
+<img width="1428" height="843" alt="Screenshot 2026-07-22 at 8 55 56 PM" src="https://github.com/user-attachments/assets/25b31036-7c72-4663-920c-904d5e21dd41" />
 
-## Repository Structure
 
-```
-airis/
-├── backend/          FastAPI service, business logic, ML training/inference
-├── data_pipeline/     Ingestion, cleaning, feature engineering (runs offline, writes to disk)
-├── frontend/          React + Leaflet decision console
-├── configs/           Non-secret settings + .env template
-├── scripts/           setup / pipeline / training entrypoints
-├── docs/              Architecture, demo script, data source notes
-└── notebooks/         Exploratory analysis only — never imported by app code
+---
+
+# ✨ Features
+
+- 📈 PM2.5 Forecasting using Machine Learning
+- 🌤️ Real-time Weather Monitoring
+- 🤖 AI-generated Environmental Insights
+- 🔥 Wildfire Risk Monitoring
+- 📊 Interactive Dashboard
+- ⚡ FastAPI REST Backend
+- 🎨 Modern React + Tailwind UI
+- 📡 Real-time API Integration
+- 📱 Responsive Dashboard Design
+
+---
+
+# 🏗️ System Architecture
+
+```text
+                Weather APIs
+                     │
+                     ▼
+          Data Collection Pipeline
+                     │
+                     ▼
+          Feature Engineering
+                     │
+                     ▼
+           Machine Learning Model
+                     │
+                     ▼
+              FastAPI Backend
+                     │
+          REST API Endpoints
+                     │
+                     ▼
+          React + TypeScript UI
+                     │
+                     ▼
+          AIRIS Dashboard
 ```
 
-Every folder contains its own `README.md` explaining its specific responsibility.
+# 🛠️ Tech Stack
+| Layer            | Technologies                                            |
+| ---------------- | ------------------------------------------------------- |
+| Frontend         | React, TypeScript, TailwindCSS, Framer Motion, Recharts |
+| Backend          | FastAPI, Python                                         |
+| Machine Learning | Scikit-learn, Pandas, NumPy                             |
+| Visualization    | Recharts                                                |
+| Version Control  | Git & GitHub                                            |
 
-## Setup Instructions
+# 📂 Project Structure
 
-Prerequisites: Python 3.11+, Node 20 LTS.
+AIRIS
+│
+├── backend/
+│
+├── frontend/
+│
+├── data_pipeline/
+│
+├── notebooks/
+│
+├── scripts/
+│
+├── configs/
+│
+├── docs/
+│
+└── README.md
 
-```bash
-# 1. Clone and enter the repo
-git clone <repo-url> airis && cd airis
-
-# 2. Copy the environment template and fill in real values
-cp .env.example .env
-# Edit .env: add GEMINI_API_KEY, EARTHDATA_LOGIN/EARTHDATA_PASSWORD
-
-# 3. Bootstrap everything (creates venv, installs backend + frontend deps)
-bash scripts/setup_env.sh
-
-# 4. Run the data pipeline (once data source scripts are implemented)
-bash scripts/run_pipeline.sh
-
-# 5. Train models (once training scripts are implemented)
-bash scripts/train_models.sh
-
-# 6. Start the backend
-source .venv/bin/activate
-uvicorn backend.app.main:app --reload --port 8000
-
-# 7. Start the frontend (separate terminal)
-cd frontend && npm run dev
+# 🚀 Getting Started
+Clone Repository
 ```
+git clone https://github.com/Akash-r09/AIRIS.git
+cd AIRIS
+```
+Backend
+```
+cd backend
 
-At the end of Milestone 0, only steps 1–3 and 6 are meaningful — the app boots with a health
-endpoint and no business logic yet. Steps 4–5 become real starting at their respective milestones.
+pip install -r requirements.txt
 
-## Development Workflow
+uvicorn app.main:app --reload
+```
+Frontend
+```
+cd frontend
 
-- Follow `docs/architecture.md` — the engineering blueprint is frozen; no new features, no new
-  libraries, no folder restructuring outside of fixing an actual bug.
-- Work milestone by milestone (see the blueprint's Part 3 table). Each milestone should leave the
-  repo in a runnable, inspectable state before the next one starts.
-- Commit format: `<type>(<scope>): <summary>` — e.g. `feat(forecast): add lag feature engineering`.
-- No secrets are ever committed. `.env` is gitignored; `.env.example` documents required keys with
-  placeholders only.
-- Data pipeline outputs (`data_pipeline/raw/`, `data_pipeline/processed/`) and model artifacts
-  (`backend/ml/artifacts/`) are gitignored — they are regenerable, not source-controlled.
+npm install
+
+npm run dev
+```
+# 📊 Dashboard Modules
+- Air Quality Metrics
+- PM2.5 Forecast
+- Weather Monitoring
+- AI Insights
+- Recommendation Engine
+
+#📌 Future Improvements
+- Satellite Data Integration
+- Live AQI APIs
+- Multi-city Monitoring
+- Mobile Application
+- Historical Trend Analysis
+- User Authentication
+- Alert Notifications
+
+<div align="center">
+Built with ❤️, FastAPI, React, Machine Learning and some 🧠
+</div> 
