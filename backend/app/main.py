@@ -56,6 +56,9 @@ def register_routes(app: FastAPI) -> None:
     from backend.app.api.routes_forecast import router as forecast_router
     app.include_router(forecast_router, prefix=api_prefix, tags=["forecast"])
 
+    from backend.app.api.routes_dashboard import router as dashboard_router
+    app.include_router(dashboard_router, prefix=api_prefix, tags=["dashboard"])
+
     # --- Placeholder mount points (Milestone 10) ---
     # from backend.app.api.routes_attribution import router as attribution_router
     # app.include_router(attribution_router, prefix=api_prefix, tags=["attribution"])
