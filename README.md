@@ -128,7 +128,7 @@ npm run dev
 - AI Insights
 - Recommendation Engine
 
-#📌 Future Improvements
+# 📌 Future Improvements
 - Satellite Data Integration
 - Live AQI APIs
 - Multi-city Monitoring
